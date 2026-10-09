@@ -7,13 +7,13 @@ Skill para criar e refinar interfaces de produto com composição cuidadosa, tip
 Com Node.js e npm instalados:
 
 ```sh
-npx skills add matusaelhorch/kodety-ui --skill kodety-ui
+npx skills add onunbeai/kodety-ui --skill kodety-ui
 ```
 
 Para instalar globalmente no Codex:
 
 ```sh
-npx skills add matusaelhorch/kodety-ui --skill kodety-ui --agent codex --global
+npx skills add onunbeai/kodety-ui --skill kodety-ui --agent codex --global
 ```
 
 Opções documentadas no [CLI Skills](https://github.com/vercel-labs/skills#install-a-skill).
