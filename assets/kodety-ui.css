@@ -1,0 +1,296 @@
+/* Optional light foundations and composition primitives. Scope with .kodety-ui.
+   These are not a complete visual design or widget behavior implementation.
+   Every authored control, including open popups, needs custom treatment.
+   Use authentic Keyline UI glyphs and genuine SVG company/app logos.
+   Adapt to the project's tokens and platform contracts without losing those requirements. */
+.kodety-ui {
+  --ku-canvas: #f6f6f5;
+  --ku-surface: #ffffff;
+  --ku-surface-soft: #f9f9f8;
+  --ku-surface-hover: #f0f0ee;
+  --ku-line: #e7e7e4;
+  --ku-control-edge: #858580;
+  --ku-ink: #222321;
+  --ku-secondary: #565952;
+  --ku-muted: #696c65;
+  --ku-action: #252623;
+  --ku-on-action: #ffffff;
+  --ku-focus: #2563eb;
+  --ku-selection: #eff6ff;
+  --ku-selection-ink: #1d4ed8;
+  --ku-danger: #b4233a;
+  --ku-danger-soft: #fff1f2;
+  --ku-success: #246347;
+  --ku-success-soft: #eaf6ee;
+  --ku-warning: #875507;
+  --ku-warning-soft: #fff5de;
+  --ku-data-accent: #f36b21;
+  --ku-radius-control: 8px;
+  --ku-radius-card: 12px;
+  --ku-radius-panel: 20px;
+  --ku-radius-stage: 14px;
+  --ku-card-inset: 6px;
+  --ku-card-content-padding: 18px;
+  --ku-sidebar-width: 224px;
+  --ku-control-height: 36px;
+  --ku-shadow-control: 0 1px 2px rgb(20 25 20 / 5%), inset 0 1px 0 rgb(255 255 255 / 80%);
+  --ku-shadow-popover: 0 12px 32px rgb(20 25 20 / 10%), 0 2px 6px rgb(20 25 20 / 5%);
+  color-scheme: light;
+  color: var(--ku-ink);
+  background: var(--ku-canvas);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.kodety-ui :where(.ku-surface, .ku-panel, .ku-popover, .ku-button, .ku-field, .ku-input, .ku-chip) {
+  box-sizing: border-box;
+}
+.kodety-ui :where(.ku-surface, .ku-panel, .ku-popover) {
+  background: var(--ku-surface);
+  border: 1px solid var(--ku-line);
+  border-radius: var(--ku-radius-card);
+}
+.kodety-ui .ku-surface { padding: 16px; }
+.kodety-ui .ku-panel { padding: 24px; border-radius: var(--ku-radius-panel); }
+.kodety-ui .ku-popover { padding: 6px; box-shadow: var(--ku-shadow-popover); }
+.kodety-ui .ku-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: var(--ku-control-height);
+  padding: 6px 12px;
+  border: 1px solid var(--ku-line);
+  border-radius: var(--ku-radius-control);
+  color: var(--ku-ink);
+  background: var(--ku-surface);
+  box-shadow: var(--ku-shadow-control);
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.3;
+  text-decoration: none;
+  cursor: pointer;
+}
+.kodety-ui .ku-button[data-variant="primary"] {
+  color: var(--ku-on-action);
+  background: var(--ku-action);
+  border-color: var(--ku-action);
+  box-shadow: 0 1px 2px rgb(20 25 20 / 10%);
+}
+.kodety-ui .ku-button[data-variant="ghost"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.kodety-ui .ku-label { display: block; margin-block-end: 6px; font-size: 13px; font-weight: 500; }
+.kodety-ui .ku-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--ku-control-height);
+  padding-inline: 10px;
+  background: var(--ku-surface-soft);
+  border: 1px solid var(--ku-control-edge);
+  border-radius: var(--ku-radius-control);
+}
+.kodety-ui .ku-input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: calc(var(--ku-control-height) - 2px);
+  padding: 6px 0;
+  border: 0;
+  border-radius: 2px;
+  color: var(--ku-ink);
+  background: transparent;
+  font: inherit;
+}
+.kodety-ui .ku-input::placeholder { color: var(--ku-muted); opacity: 1; }
+.kodety-ui .ku-affix { flex: none; color: var(--ku-secondary); font-size: 13px; }
+.kodety-ui .ku-help { margin-block: 6px 0; color: var(--ku-muted); font-size: 12px; }
+.kodety-ui .ku-error { margin-block: 6px 0; color: var(--ku-danger); font-size: 12px; }
+.kodety-ui .ku-field:focus-within { border-color: var(--ku-focus); }
+.kodety-ui .ku-field[data-invalid="true"] { border-color: var(--ku-danger); background: var(--ku-danger-soft); }
+.kodety-ui :where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--ku-focus);
+  outline-offset: 2px;
+}
+/* One continuous ring for the input; independent actions retain their own ring.
+   Browsers without :has keep the visible input outline above. */
+@supports selector(:has(*)) {
+  .kodety-ui .ku-field:has(> .ku-input:focus-visible) {
+    outline: 2px solid var(--ku-focus);
+    outline-offset: 2px;
+  }
+  .kodety-ui .ku-field:has(> .ku-input:focus-visible) > .ku-input:focus-visible {
+    outline: none;
+  }
+}
+.kodety-ui .ku-button:disabled { cursor: not-allowed; box-shadow: none; color: var(--ku-muted); background: var(--ku-surface-hover); border-color: var(--ku-line); }
+.kodety-ui .ku-input:disabled { cursor: not-allowed; color: var(--ku-muted); }
+.kodety-ui .ku-field[data-disabled="true"] { background: var(--ku-surface-hover); }
+.kodety-ui .ku-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 2px 7px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--ku-secondary);
+  background: var(--ku-surface-hover);
+  font: inherit;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.kodety-ui .ku-chip[data-tone="lavender"] { background: #f0edff; color: #5743a6; }
+.kodety-ui .ku-chip[data-tone="green"] { background: var(--ku-success-soft); color: var(--ku-success); }
+.kodety-ui .ku-chip[data-tone="pink"] { background: #fcecf5; color: #98366a; }
+.kodety-ui .ku-chip[data-tone="blue"] { background: #eaf2ff; color: #285da5; }
+.kodety-ui .ku-chip[data-tone="amber"] { background: var(--ku-warning-soft); color: var(--ku-warning); }
+.kodety-ui .ku-property { display: grid; grid-template-columns: minmax(112px, 30%) minmax(0, 1fr); align-items: baseline; gap: 8px 16px; padding-block: 10px; }
+.kodety-ui .ku-property-value { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; overflow-wrap: anywhere; }
+.kodety-ui .ku-metric { font-size: 32px; font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; font-variant-numeric: tabular-nums; }
+
+/* Composed metric: coordinated outer shell, inset stage, white identity footer.
+   Populate evidence only from actual data; do not add graphs to fill blank space. */
+.kodety-ui .ku-composed-card {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 0;
+  padding: var(--ku-card-inset);
+  border: 1px solid var(--ku-line);
+  border-radius: var(--ku-radius-panel);
+  background: var(--ku-surface);
+}
+.kodety-ui .ku-card-stage {
+  min-width: 0;
+  padding: var(--ku-card-content-padding);
+  border-radius: var(--ku-radius-stage);
+  background: var(--ku-surface-soft);
+}
+.kodety-ui .ku-card-value {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.kodety-ui .ku-card-context {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-block-start: 10px;
+  color: var(--ku-secondary);
+}
+.kodety-ui .ku-card-evidence { margin-block-start: 22px; min-width: 0; }
+.kodety-ui .ku-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px var(--ku-card-content-padding) 10px;
+  color: var(--ku-secondary);
+}
+.kodety-ui .ku-icon { width: 18px; height: 18px; flex: none; }
+.kodety-ui .ku-brand-logo { display: block; object-fit: contain; flex: none; }
+
+/* Composed record: identity/title region, one metadata well, compact utility edge. */
+.kodety-ui .ku-record-card {
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--ku-line);
+  border-radius: var(--ku-radius-card);
+  background: var(--ku-surface);
+}
+.kodety-ui .ku-record-heading { margin: 0; font-size: 14px; font-weight: 500; line-height: 1.4; }
+.kodety-ui .ku-property-well {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--ku-surface-hover);
+}
+.kodety-ui .ku-property-well-row {
+  display: grid;
+  grid-template-columns: minmax(86px, .9fr) minmax(0, 1.1fr);
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  font-size: 12px;
+}
+.kodety-ui .ku-property-well-row > :where(dt, dd) { margin: 0; overflow-wrap: anywhere; }
+.kodety-ui .ku-property-well-row > dt { display: grid; grid-template-columns: 14px minmax(0, 1fr); align-items: center; gap: 6px; color: var(--ku-secondary); }
+.kodety-ui .ku-property-well-row > dt > .ku-icon { width: 14px; height: 14px; }
+.kodety-ui .ku-record-footer { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; color: var(--ku-muted); font-size: 12px; }
+
+/* The application supplies shell sizing, real routes, disclosure and mobile behavior. */
+.kodety-ui .ku-sidebar {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: var(--ku-sidebar-width);
+  max-width: 100%;
+  min-height: 0;
+  padding: 12px;
+  background: var(--ku-canvas);
+}
+.kodety-ui .ku-sidebar-header { display: flex; align-items: center; gap: 8px; min-height: 44px; padding-inline: 8px; }
+.kodety-ui .ku-sidebar-scroll { min-height: 0; overflow-y: auto; padding-block: 12px; scrollbar-gutter: stable; }
+.kodety-ui .ku-nav-group + .ku-nav-group { margin-block-start: 20px; }
+.kodety-ui .ku-nav-group-label { margin: 0 0 6px; padding-inline: 8px; color: var(--ku-secondary); font-size: 12px; font-weight: 400; }
+.kodety-ui .ku-nav-item {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  margin-block: 2px;
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ku-secondary);
+  font: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  text-align: start;
+  cursor: pointer;
+}
+.kodety-ui .ku-nav-item[aria-current="page"] { color: var(--ku-ink); background: var(--ku-surface); box-shadow: 0 1px 2px rgb(20 25 20 / 4%); }
+.kodety-ui .ku-sidebar-footer { display: flex; align-items: center; gap: 8px; min-height: 44px; padding-inline: 8px; }
+
+@media (hover: hover) {
+  .kodety-ui .ku-button:hover:not(:disabled) { background: var(--ku-surface-hover); }
+  .kodety-ui .ku-button[data-variant="primary"]:hover:not(:disabled) { background: var(--ku-secondary); }
+  .kodety-ui .ku-nav-item:hover:not([aria-current="page"]) { background: var(--ku-surface-hover); }
+}
+@media (pointer: coarse) {
+  .kodety-ui { --ku-control-height: 44px; }
+  .kodety-ui .ku-button { min-width: 44px; }
+  .kodety-ui .ku-input { font-size: 16px; }
+  .kodety-ui .ku-nav-item { min-height: 44px; }
+}
+@media (max-width: 480px) {
+  .kodety-ui .ku-property { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .kodety-ui .ku-panel { padding: 16px; }
+}
+@media (forced-colors: active) {
+  .kodety-ui :where(.ku-field, .ku-button, .ku-chip) { border-color: ButtonText; }
+  .kodety-ui :where(button, a, input, select, textarea, [tabindex]):focus-visible { outline-color: Highlight; }
+  .kodety-ui .ku-field:has(> .ku-input:focus-visible) { outline-color: Highlight; }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kodety UI"
+  short_description: "Composed UI, custom controls, and Keyline Icons"
+  default_prompt: "Use $kodety-ui to refine this interface with deliberate composition, fully custom controls, Keyline Icons, authentic SVG brand logos, and the sidebar/card recipes where applicable."
